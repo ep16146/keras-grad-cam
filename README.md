@@ -4,7 +4,7 @@ The original code could only keras version 2.0.9 under.
 
 So, I modified little line. Usage is same like original version.
 
-`$ python grad-cam.keras.2.1.3.py <path_to_image>`
+`$ python grad-cam.py <path_to_image>`
 
 
 
