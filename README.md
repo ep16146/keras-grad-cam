@@ -10,7 +10,7 @@ So, I modified little line. Usage is same like original version.
 
 <hr/>
 
-below script from original github(https://github.com/jacobgil/keras-grad-cam)
+below script is from original github(https://github.com/jacobgil/keras-grad-cam)
 
 <hr/>
 
