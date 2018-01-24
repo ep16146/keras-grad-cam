@@ -12,8 +12,6 @@ So, I modified little line. Usage is same like original version.
 
 below script is from original github(https://github.com/jacobgil/keras-grad-cam)
 
-<hr/>
-
 ## Grad-CAM implementation in Keras ##
 
 Gradient class activation maps are a visualization technique for deep learning networks.
