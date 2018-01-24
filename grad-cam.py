@@ -22,7 +22,8 @@ def normalize(x):
     return x / (K.sqrt(K.mean(K.square(x))) + 1e-5)
 
 def load_image(path):
-    img_path = sys.argv[1]
+    #img_path = sys.argv[1]
+    img_path = path
     img = image.load_img(img_path, target_size=(224, 224))
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
@@ -86,16 +87,17 @@ def deprocess_image(x):
     return x
 
 def grad_cam(input_model, image, category_index, layer_name):
-    model = Sequential()
-    model.add(input_model)
-
     nb_classes = 1000
     target_layer = lambda x: target_category_loss(x, category_index, nb_classes)
-    model.add(Lambda(target_layer,
-                     output_shape = target_category_loss_output_shape))
+
+    x = input_model.layers[-1].output
+    x = Lambda(target_layer, output_shape=target_category_loss_output_shape)(x)
+    model = keras.models.Model(input_model.layers[0].input, x)
 
     loss = K.sum(model.layers[-1].output)
-    conv_output =  [l for l in model.layers[0].layers if l.name is layer_name][0].output
+    #conv_output = [l for l in model.layers[0].layers if l.name is layer_name][0].output
+    conv_output = [l for l in model.layers if l.name is layer_name][0].output
+
     grads = normalize(K.gradients(loss, conv_output)[0])
     gradient_function = K.function([model.layers[0].input], [conv_output, grads])
 
@@ -123,6 +125,7 @@ def grad_cam(input_model, image, category_index, layer_name):
     return np.uint8(cam), heatmap
 
 preprocessed_input = load_image(sys.argv[1])
+#preprocessed_input = load_image("./examples/boat.jpg")
 
 model = VGG16(weights='imagenet')
 
