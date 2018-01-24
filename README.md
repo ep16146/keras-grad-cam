@@ -1,3 +1,19 @@
+# Grad-CAM implementation for Keras version 2.1.3
+
+The original code could only keras version 2.0.9 under.
+
+So, I modified little line. Usage is same like original version.
+
+`$ python grad-cam.keras.2.1.3.py <path_to_image>`
+
+
+
+<hr/>
+
+below script from original github(https://github.com/jacobgil/keras-grad-cam)
+
+<hr/>
+
 ## Grad-CAM implementation in Keras ##
 
 Gradient class activation maps are a visualization technique for deep learning networks.
